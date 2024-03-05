@@ -7,8 +7,6 @@ import ru.practicum.kanbanApp.model.Task;
 import ru.practicum.kanbanApp.service.Managers;
 import ru.practicum.kanbanApp.service.taskManager.TaskManager;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
