@@ -57,14 +57,14 @@ public class InMemoryHistoryManager implements HistoryManager {
                     return;
                 }
             }
-            Node secondLast = last; // предпоследний элемент
+            Node secondLast = last; // РїСЂРµРґРїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚
             last = new Node(secondLast, task, null);
             historyStorage.put(task.getId(), last);
 
-            int prevTaskId = secondLast.task.getId(); // id предыдущего  (нода)
-            Node prevNode = historyStorage.get(prevTaskId); // предыдущий нод
-            prevNode.next = last; // в предыдущем ноде заполнили next
-            historyStorage.put(prevTaskId, prevNode); // обновили предыдущий нод
+            int prevTaskId = secondLast.task.getId(); // id РїСЂРµРґС‹РґСѓС‰РµРіРѕ  (РЅРѕРґР°)
+            Node prevNode = historyStorage.get(prevTaskId); // РїСЂРµРґС‹РґСѓС‰РёР№ РЅРѕРґ
+            prevNode.next = last; // РІ РїСЂРµРґС‹РґСѓС‰РµРј РЅРѕРґРµ Р·Р°РїРѕР»РЅРёР»Рё next
+            historyStorage.put(prevTaskId, prevNode); // РѕР±РЅРѕРІРёР»Рё РїСЂРµРґС‹РґСѓС‰РёР№ РЅРѕРґ
         }
     }
 
@@ -74,8 +74,8 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         if (removedNode.prev == null) {
             if (removedNode.next != null) {
-                nodeAfterRemoved = removedNode.next; // получаем из удаляемого нода следующий нод
-                nodeAfterRemoved.prev = null;// после удаления первого следующий нод станет первым
+                nodeAfterRemoved = removedNode.next; // РїРѕР»СѓС‡Р°РµРј РёР· СѓРґР°Р»СЏРµРјРѕРіРѕ РЅРѕРґР° СЃР»РµРґСѓСЋС‰РёР№ РЅРѕРґ
+                nodeAfterRemoved.prev = null;// РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ РїРµСЂРІРѕРіРѕ СЃР»РµРґСѓСЋС‰РёР№ РЅРѕРґ СЃС‚Р°РЅРµС‚ РїРµСЂРІС‹Рј
                 firstNode = nodeAfterRemoved;
                 historyStorage.put(nodeAfterRemoved.task.getId(), nodeAfterRemoved);
             }
