@@ -61,8 +61,9 @@ class InMemoryTaskManagerTest {
         task2.setId(2);
         assertNotNull(taskManager.getTaskById(2));
     }
-@Test
-    public void tasksShouldBeEqualIfEqualTaskId(){
+
+    @Test
+    public void tasksShouldBeEqualIfEqualTaskId() {
         Task task1 = new Task("Задача 1", "Описание задачи 1");
         task1.setId(12);
         Task task2 = new Task("Задача 2", "Описание задачи 2");
@@ -71,7 +72,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void epicsShouldBeEqualIfEqualEpicId(){
+    public void epicsShouldBeEqualIfEqualEpicId() {
         Epic epic1 = new Epic("Эпик 1", "Описание эпика 1");
         epic1.setId(12);
         Epic epic2 = new Epic("Эпик 2", "Описание эпика 2");
@@ -80,7 +81,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void subtasksShouldBeEqualIfEqualSubtaskId(){
+    public void subtasksShouldBeEqualIfEqualSubtaskId() {
         Subtask subtask1 = new Subtask("Задача 1", "Описание задачи 1", 2);
         subtask1.setId(12);
         Subtask subtask2 = new Subtask("Задача 2", "Описание задачи 2", 2);
@@ -89,17 +90,17 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void notShouldBeAddSubtaskInNotCreatedEpic(){
+    public void notShouldBeAddSubtaskInNotCreatedEpic() {
         Epic epic = new Epic("Эпик 1", "Описание эпика 1");
         taskManager.createEpic(epic);
         Subtask subtask = new Subtask("Задача 1", "Описание задачи 1", epic.getId());
         subtask.setEpicId(404);
         taskManager.createSubtask(subtask);
-        assertEquals(0,epic.getSubtasksIdListInEpic().size(), epic.toString());
+        assertEquals(0, epic.getSubtasksIdListInEpic().size(), epic.toString());
     }
 
     @Test
-    public void notUpdateNonExistentEpic(){
+    public void notUpdateNonExistentEpic() {
         Epic epic = new Epic("Эпик 1", "Описание эпика 1");
         taskManager.createEpic(epic);
         epic.setId(404);

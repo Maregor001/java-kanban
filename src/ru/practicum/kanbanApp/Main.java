@@ -91,12 +91,5 @@ public class Main {
         System.out.println(taskManager.getAllTasksList());
         System.out.println(taskManager.getAllEpicsList());
         System.out.println(taskManager.getAllSubtasksList());
-
-        taskManager.createTask(task1);
-        for (int i = 0; i < 8; i++) {
-            taskManager.getTaskById(task1.getId());
-        }
-        System.out.println(taskManager.getHistory());
     }
-
 }

@@ -85,6 +85,7 @@ public class InMemoryTaskManager implements TaskManager {
     public Integer deleteTaskById(int taskId) {
         if (taskStorage.containsKey(taskId)) {
             taskStorage.remove(taskId);
+            historyManager.remove(taskId);
             return taskId;
         } else {
             return 404;
@@ -100,6 +101,7 @@ public class InMemoryTaskManager implements TaskManager {
                 if (subtaskIdFromList == subtaskId) {
                     subtaskIdList.remove(subtaskIdFromList);
                     subtaskStorage.remove(subtaskId);
+                    historyManager.remove(subtaskId);
                     break;
                 }
             }
@@ -113,9 +115,11 @@ public class InMemoryTaskManager implements TaskManager {
     public Integer deleteEpicById(Integer epicId) {
         if (epicStorage.containsKey(epicId)) {
             Epic epic = epicStorage.remove(epicId);
+            historyManager.remove(epicId);
             List<Integer> subtasksIdInEpic = epic.getSubtasksIdListInEpic();
             for (Integer subtaskId : subtasksIdInEpic) {
                 subtaskStorage.remove(subtaskId);
+                historyManager.remove(subtaskId);
             }
             return epicId;
         } else {
@@ -125,19 +129,25 @@ public class InMemoryTaskManager implements TaskManager {
 
     public Task getTaskById(Integer taskId) {
         Task task = taskStorage.get(taskId);
-        historyManager.addTask(task);
+        if (task != null) {
+            historyManager.addTask(task);
+        }
         return task;
     }
 
     public Subtask getSubtaskById(Integer subtaskId) {
         Subtask subtask = subtaskStorage.get(subtaskId);
-        historyManager.addTask(subtask);
+        if (subtask != null) {
+            historyManager.addTask(subtask);
+        }
         return subtask;
     }
 
     public Epic getEpicById(Integer epicId) {
         Epic epic = epicStorage.get(epicId);
-        historyManager.addTask(epic);
+        if (epic != null) {
+            historyManager.addTask(epic);
+        }
         return epic;
     }
 
