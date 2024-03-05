@@ -194,9 +194,11 @@ public class InMemoryTaskManager implements TaskManager {
                 cntDone++;
             }
         }
-        if (cntNew == subTasksIdList.size()) epic.setTaskStatus(TaskStatus.NEW);
-        else if (cntDone == subTasksIdList.size()) epic.setTaskStatus(TaskStatus.DONE);
-        else epic.setTaskStatus(TaskStatus.IN_PROGRESS);
+        if (cntNew == subTasksIdList.size()) {
+            epic.setTaskStatus(TaskStatus.NEW);
+        } else if (cntDone == subTasksIdList.size()) {
+            epic.setTaskStatus(TaskStatus.DONE);
+        } else epic.setTaskStatus(TaskStatus.IN_PROGRESS);
     }
 
     public List<Task> getHistory() {
